@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:21:59 by thibault          #+#    #+#             */
-/*   Updated: 2024/03/19 18:46:34 by thibault         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:03:06 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,29 @@ t_matrix	mx_view_transform(t_vec3 from, t_vec3 to, t_vec3 up)
 	return (mx_mx_multiply(orientation, mx_translation(from.x, from.y, from.z)));
 }
 
-t_cam	init_camera(t_canevas *cnv, char *line)
+t_cam	init_camera(t_canevas *cnv, char **scene_values)
 {
 	t_cam	cam;
 	t_vec3	location_pt;
 	t_vec3	direction_pt;
-	int		fov_angle_degre;
+	//int		fov_angle_degre;
+	char 	**coord;
+	char 	**norm;
 
 	// STEP 1: PARSE parameters from input file
 	// location_pt = vec3_create(0, 2, 12, 1);
 	// direction_pt = vec3_create(0, 0, 0, 1);
 	// fov_angle_degre = 90;
-
-	location_pt = vec3_create(0, 0, 12, 1);
-	direction_pt = vec3_create(0, 0, 0, 1);
-	fov_angle_degre = 90;
+	coord = ft_split(scene_values[1], ',');
+	norm = ft_split(scene_values[2], ',');
+	location_pt = vec3_create(ft_atod(coord[0]), ft_atod(coord[1]),
+								ft_atod(coord[2]), 1);
+	//location_pt = vec3_create(0, 0, 12, 1);
+	direction_pt = vec3_create(ft_atod(norm[0]), ft_atod(norm[1]),
+								ft_atod(norm[2]), 1);
+	//direction_pt = vec3_create(0, 0, 0, 1);
+	//fov_angle_degre = ft_atoi(scene_values[3]);
+	//fov_angle_degre = 90;
 
 	//This coordinates works
 	// location_pt = vec3_create(0, 1.5, -5, 1);
@@ -63,7 +71,7 @@ t_cam	init_camera(t_canevas *cnv, char *line)
 	// fov_angle_degre = 90;
 
 	//STEP 2: Create CAMERA
-	(void)line;
+	//(void)line;
 	// cam = (t_cam *)malloc(sizeof(t_cam));
 	// if (!(cam))
 	// 	return (0);
@@ -71,7 +79,7 @@ t_cam	init_camera(t_canevas *cnv, char *line)
 	//STEP 3: Compute et define camera parameters
 	cam.location = location_pt;
 	cam.direction = direction_pt;
-	cam.fov_angle_rad = degreesToRadians(fov_angle_degre);
+	cam.fov_angle_rad = degreesToRadians(ft_atoi(scene_values[3]));
 	cam.a_r = cnv->a_r;
 	cam.win_width = cnv->win_width;
 	cam_find_pixel_size(&cam);

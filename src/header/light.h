@@ -6,7 +6,7 @@
 /*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:31:25 by thibault          #+#    #+#             */
-/*   Updated: 2024/03/20 21:13:01 by zsoltani         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:04:36 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ typedef struct s_light
 	int	in_shadow;
 }	t_light;
 
+typedef struct s_ambient
+{
+	double	ratio;
+	t_color	color;
+}	t_ambient;
+
 typedef struct s_sight
 {
 	t_vec3	eyev;
@@ -35,6 +41,5 @@ t_color	lighting(t_shape *shape, t_light light, t_vec3 point, t_sight sight);
 t_color	dark_exposure(t_material m, t_exposure e);
 t_color	light_exposure(t_material m, t_light light,	t_exposure e, t_sight sight);
 t_color	color_get_hit_color(t_world world, t_param param);
-
 
 #endif

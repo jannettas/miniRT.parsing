@@ -6,7 +6,7 @@
 #    By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by ebennace          #+#    #+#              #
-#    Updated: 2024/03/20 17:49:55 by zsoltani         ###   ########.fr        #
+#    Updated: 2024/03/21 19:09:45 by zsoltani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,11 @@ SRCS       = 		src/minirt.c \
 					src/shapes.c \
 					src/color.c \
 					src/light.c \
-					src/parser.c \
-					src/parser_2.c \
+					src/parser_utils_1.c \
+					src/parser_utils_2.c \
+					src/parse_scene.c \
+					src/parse_shapes.c \
+					src/parse_light.c \
 
 # ==== Source: object files ==== #
 OBJS = $(SRCS:.c=.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:21:59 by thibault          #+#    #+#             */
-/*   Updated: 2024/03/19 19:10:22 by thibault         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:40:50 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,25 @@ t_sphere sphere_create(t_vec3 pt, double rad)
 	return (new_sphere);
 }
 
+t_plane plane_create(t_vec3 pt, t_vec3 norm)
+{
+	t_plane	new_plane;
+
+	new_plane.origin = pt;
+	new_plane.normal = norm;
+	return (new_plane);
+}
+
+t_cylinder cylinder_create(t_vec3 pt, t_vec3 norm, double rad, double height)
+{
+	t_cylinder	new_cylinder;
+
+	new_cylinder.origin = pt;
+	new_cylinder.normal = norm;
+	new_cylinder.radius = rad;
+	new_cylinder.height = height;
+	return (new_cylinder);
+}
 
 // # the vector from the sphere's center, to the ray origin
 // # remember: the sphere is centered at the world origin

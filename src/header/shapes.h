@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 11:02:42 by thibault          #+#    #+#             */
-/*   Updated: 2024/03/18 15:57:05 by thibault         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:41:45 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ typedef struct s_sphere
 	t_vec3	origin;
 }	t_sphere;
 
+typedef struct s_plane
+{
+	t_vec3	origin;
+	t_vec3	normal;
+}	t_plane;
+
+typedef struct s_cylinder
+{
+	t_vec3	origin;
+	t_vec3	normal;
+	double	radius;
+	double	height;
+}	t_cylinder;
+
 typedef struct s_discriminant
 {
 	double	a;
@@ -40,8 +54,8 @@ typedef struct s_shape
 	union
 	{
 		t_sphere	sphere;
-		// t_plane		plane;
-		// t_cylinder	cylinder;
+		t_plane		plane;
+		t_cylinder	cylinder;
 		// t_cone		cone;
 	};
 	
@@ -75,6 +89,8 @@ typedef struct s_param
 }	t_param;
 
 t_sphere sphere_create(t_vec3 point, double radius);
+t_plane plane_create(t_vec3 pt, t_vec3 norm);
+t_cylinder cylinder_create(t_vec3 pt, t_vec3 norm, double rad, double height);
 t_discriminant	ray_sphere_intersect(t_ray ray, t_sphere *sphere);
 // int	ray_shape_intersection(t_hit **hit_list, t_shape *shape, t_ray ray);
 int	ray_shape_intersection(t_hit **hit_list, t_shape *shape, t_ray ray);

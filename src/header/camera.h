@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:31:25 by thibault          #+#    #+#             */
-/*   Updated: 2024/03/15 16:55:09 by thibault         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:07:44 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_cam
 }	t_cam;
 
 
-t_cam	init_camera(t_canevas *cnv, char *line);
+t_cam	init_camera(t_canevas *cnv, char **scene_values);
 void	cam_find_pixel_size(t_cam *cam);
 double	degreesToRadians(double degrees);
 
