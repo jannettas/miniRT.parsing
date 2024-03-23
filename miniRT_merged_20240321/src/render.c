@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:21:59 by thibault          #+#    #+#             */
-/*   Updated: 2024/03/21 16:55:48 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/03/23 11:57:28 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	img_pix_put(t_canevas *cnv, int x, int y, int color)
 {
 	char	*pixel;
 	int		len;
-	static int		i = 0;
+	// static int		i = 0;
 
 	
 	// if(y > 220 && x > 450)
@@ -29,7 +29,7 @@ void	img_pix_put(t_canevas *cnv, int x, int y, int color)
 		return ;
 	pixel = cnv->addr + (y * len + x * (cnv->bpp / 8));
 	*(unsigned int *)pixel = color;
-	printf("\rFor %d pixel x=%d, y=%d\n", i++, x, y);
+	// printf("\rFor %d pixel x=%d, y=%d\n", i++, x, y);
 }
 
 void	hex_to_rgb(int hexColor, int rgb[3])
@@ -132,7 +132,7 @@ int	render_xy_pts(t_canevas *cnv, t_scn *scn)
 					// color = color_new(1, 0, 0);
 				// ray_print(ray);
 				// printf("Pixel's color:\n");
-				color_print(color);
+				// color_print(color);
 				// if (color.blue == 0 && color.green == 0 && color.red == 0)
 				// 	exit(0);
 			}

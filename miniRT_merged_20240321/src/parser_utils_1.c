@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:39:12 by zsoltani          #+#    #+#             */
-/*   Updated: 2024/03/21 18:27:34 by zsoltani         ###   ########.fr       */
+/*   Updated: 2024/03/23 12:55:44 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,12 @@ double	ft_atod(const char *str)
 		i++;
 	}
 	if (str[i] == '-' || str[i] == '+')
+		i++;
 	while (str[i] >= '0' && str[i] <= '9')
-		res = res * 10 + str[i++] - '0';
+	{
+		res = res * 10 + str[i] - '0';
+		i++;	
+	}
 	if (str[i] == '.')
 	{
 		i++;
@@ -108,5 +112,6 @@ double	ft_atod(const char *str)
 			res = res + (str[i++] - '0') * f;
 		}
 	}
+	// printf("res: %f\n", res);
 	return (res * sign);
 }

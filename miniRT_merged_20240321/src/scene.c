@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:21:59 by thibault          #+#    #+#             */
-/*   Updated: 2024/03/21 18:59:06 by zsoltani         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:27:25 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	init_scene(char *scene_file, t_canevas *cnv, t_scn *scene)
 		vec3_print(scene->camera.location);
 		printf("cam.pixel_size: %.6f \n", scene->camera.pixel_size);
 		printf("cam.transform:\n");
-		mx_print(scene->camera.transform);
+		// mx_print(scene->camera.transform);
 		printf("cam.inverse:\n");
 		mx_print(scene->camera.inverse);
 	}
@@ -98,7 +98,10 @@ int	init_scene(char *scene_file, t_canevas *cnv, t_scn *scene)
 		int i = 0;
 		while (i < scene->world.nb_shape)
 		{
-			printf("shape nb: %d, pt: %p\n", i, &scene->world.shape_tab[i]);
+			// t_shape *tmp_shape = &scene->world.shape_tab[i];
+			printf("shape nb: %d, pt: %p", i, &scene->world.shape_tab[i]);
+			// if (tmp_shape->type_of_shape == SPHERE)
+			// 	printf("radius : %.2f\n", tmp_shape->sphere.radius);
 			i++;
 		}
 	// TEMPORARY CODE: create light
@@ -154,8 +157,9 @@ t_material	shape_init_material(t_color color)
 	t_material	m;
 
 	m.color = color;
-	m.ambient = (t_color){0.1, 0.1, 0.1}; 
-	// m.ambient = (t_color){1, 1, 1};
+	m.ambient = color_multiply((t_color){1, 1, 1}, world.ambiant.ratio);
+	m.ambient = (t_color){0.1, 0.1, 0.1};
+	// m.ambient = &world.ambiant
 	m.diffuse = 0.7;
 	m.specular = 0.3;
 	m.shininess = 200;

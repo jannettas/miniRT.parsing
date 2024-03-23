@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_shapes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 14:23:31 by zsoltani          #+#    #+#             */
-/*   Updated: 2024/03/21 18:58:21 by zsoltani         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:27:19 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	add_shape_plane(t_shape *shape_elem, char **scene_values)
 // ∗ the cylinder height: 21.42
 // ∗ R,G,B colors in range [0,255]: 10, 0, 255
 
-void	add_shape_cylinder(t_shape *shape_elem, char **scene_values)
+void	add_shape_cylinder(t_shape *shape_elem, char **scene_values, t_world *world)
 {
 	char		**coord;
 	char		**norm;
@@ -86,6 +86,7 @@ void	add_shape_cylinder(t_shape *shape_elem, char **scene_values)
 	//STEP 3: parse and get SHAPE attribute (color).
 	shape_elem->material = shape_init_material((t_color){ft_atod(col[0]),
 											ft_atod(col[1]), ft_atod(col[2])});
+	shape_elem.material.ambient = world->ambient;
 	free_split(coord);
 	free_split(norm);
 	free_split(col);
@@ -110,16 +111,20 @@ void	add_shape_sphere(t_shape *shape_elem, char **scene_values)
 	if (!shape_elem)
 		return;
 	coord = ft_split(scene_values[1], ',');
+	// printf("coord: %s\n", coord[0]);
 	col = ft_split(scene_values[3], ',');
 	if (check_sphere(scene_values, coord, col) == 0)
 		return;
 	//STEP 2: parse and get SPHERE attribute (origin, radius).
-	shape_elem->sphere.origin = (vec3_create)(ft_atod(coord[0]), 
+	shape_elem->sphere.origin = vec3_create(ft_atod(coord[0]), 
 									ft_atod(coord[1]), ft_atod(coord[2]), 1);
+
+	vec3_print(shape_elem->sphere.origin);
 	shape_elem->sphere.radius = ft_atod(scene_values[2]) / 2;
 	shape_elem->sphere = sphere_create(shape_elem->sphere.origin, 
 									shape_elem->sphere.radius);
 	shape_elem->type_of_shape = SPHERE;
+	
 	//STEP 3: parse and get SHAPE attribute (color).
 	color = (t_color){ft_atod(col[0]), ft_atod(col[1]), ft_atod(col[2])};
 	//color = (t_color){1, 0, 1};
@@ -139,6 +144,8 @@ void	add_shape_sphere(t_shape *shape_elem, char **scene_values)
 	shape_elem->transform = transform;
 	shape_elem->inverse = inverse;
 	shape_elem->transpose = transpose;
+
+	printf("radius: %.2f\n", shape_elem->sphere.radius);
 	
 	//TESTS
 		// shape_elem->transform = mx_mx_multiply(shape_elem->transform, mx_scaling(0.5, 0.5, 0.5));

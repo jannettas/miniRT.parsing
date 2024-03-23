@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:28:24 by zsoltani          #+#    #+#             */
-/*   Updated: 2024/03/21 18:29:08 by zsoltani         ###   ########.fr       */
+/*   Updated: 2024/03/23 13:18:19 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,26 +89,29 @@ void	parse_scene(char *scene_file, t_canevas *cnv, t_scn *scene) //when used wit
 		if (ft_strncmp(scene_values[0], "L", 1) == 0)
 		{
 			add_light(scene->world.light_tab++, scene_values);
-			//printf("light_tab: %p\n", scene->world.light_tab);
+			printf("light_tab: %p\n", scene->world.light_tab);
 		}
 		else if (ft_strncmp(scene_values[0], "C", 1) == 0)
-			init_camera(cnv, scene_values);
+			scene->camera = init_camera(cnv, scene_values);
+
 		else if (ft_strncmp(scene_values[0], "A", 1) == 0)
-			;//init_ambient(scene, scene_values);
+			;//add_ambient_lightning(scene->world, scene_values); // to decide where do we put it in the struct
 		else if (ft_strncmp(scene_values[0], "sp", 2) == 0)
 		{
 			add_shape_sphere(scene->world.shape_tab++, scene_values);
 			//printf("shape_tab_sphere: %p\n", scene->world.shape_tab);
+			//printf("radius: %.2f\n", scene->world.shape_tab->sphere.radius);
+			//scene->world.shape_tab++;
 		}
 		else if (ft_strncmp(scene_values[0], "pl", 2) == 0)
 		{
 			add_shape_plane(scene->world.shape_tab++, scene_values);
-			//printf("shape_tab_plane: %p\n", scene->world.shape_tab);
+			printf("shape_tab_plane: %p\n", scene->world.shape_tab);
 		}
 		else if (ft_strncmp(scene_values[0], "cy", 2) == 0)
 		{
 			add_shape_cylinder(scene->world.shape_tab++, scene_values);
-			//printf("shape_tab_cylindre: %p\n", scene->world.shape_tab);
+			printf("shape_tab_cylindre: %p\n", scene->world.shape_tab);
 		}
 		free(scene_values);
 		free(line);

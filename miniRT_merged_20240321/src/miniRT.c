@@ -181,6 +181,7 @@ int	main(int argc, char **scene_name)
 		printf("\n== DEBUG MODE in main ==\n");
 		printf("canevas->win_ptr: %p\n", canevas.win_ptr);
 	}
+	//printf("spher radius %.2f\n", canevas.scene->world.shape_tab[0].sphere.radius);
 	render(&canevas, &scene);
 	print_on_window(&canevas, "miniRT");
 	mlx_expose_hook(canevas.win_ptr, show_window, &canevas);
@@ -286,7 +287,8 @@ int	handle_input(int keysym, t_canevas *cnv)
 
 int	close_window(t_canevas *cnv)
 {
-	free_and_exit(cnv);
+	(void)cnv;
+	// free_and_exit(cnv);
 	exit (0);
 }
 
